@@ -11,6 +11,7 @@
 namespace Epmnzava\Beempayments\util;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Log;
 
 
@@ -34,7 +35,7 @@ class BeemApi
         $credentials = base64_encode("$this->key:$this->secret");
 
 
-
+        try {
         $response = $client->get(
             $url,
             [
@@ -44,6 +45,11 @@ class BeemApi
             ]
         );
 
+        }catch(ClientException $e){
+
+            echo " there was an error".json_encode($e);
+
+        }
 
         return $response;
     }
