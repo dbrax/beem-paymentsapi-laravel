@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Author: Emmanuel Paul Mnzava
  * Twitter: @epmnzava
@@ -6,6 +7,7 @@
  * Email: emmanuel@opensource.co.tz
  *
  */
+
 namespace Epmnzava\Beempayments;
 
 use Epmnzava\Beempayments\util\BeemApi;
@@ -28,14 +30,25 @@ class Beempayments
     ) {
         $this->apikey = config("beempayments.api_key");
         $this->secretkey = config("beempayments.secret_key");
-        $url = config('beempayments.base_url')."/v1/checkout". 
-        "?amount=".$amount."&reference_number=".$reference_number."&sendSource=true&mobile=".$mobile_number;
+        $url = config('beempayments.base_url') . "/v1/checkout" .
+            "?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number;
 
         $beemapi = new BeemApi($this->apikey, $this->secretkey);
         $reponse = $beemapi->BpayRequest($url);
 
 
-        echo json_encode($reponse);
+
+        if($reponse["status"]==1){
+            //success
+
+            //$reponse["data"];
+
+        }
+        else{
+
+            //error
+            return $reponse["data"];
+        }
 
         //possible reponses
 

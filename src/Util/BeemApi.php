@@ -12,6 +12,7 @@ namespace Epmnzava\Beempayments\util;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use Log;
 
 
@@ -36,21 +37,25 @@ class BeemApi
 
 
         try {
-        $response = $client->get(
-            $url,
-            [
-                'headers' => [
-                    'Authorization' => 'Basic ' . $credentials,
-                ],
-            ]
-        );
+            $response = $client->get(
+                $url,
+                [
+                    'headers' => [
+                        'Authorization' => 'Basic ' . $credentials,
+                        'Accept' => 'application/json',
+                        'Content-Type: application/json',
 
-        }catch(ClientException $e){
+                    ],
+                ]
 
-            echo " there was an error".json_encode($e);
 
+            );
+
+            return ["status" => 1, "data" => $response];
+        } catch (\Exception $e) {
+
+
+            return ["status" => 0, "data" =>$e->getMessage()];
         }
-
-        return $response;
     }
 }
