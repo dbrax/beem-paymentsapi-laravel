@@ -36,7 +36,7 @@ class BeemApi
 
 
         $response = $client->get(
-            'url',
+            $url,
             [
                 'headers' => [
                     'Authorization' => 'Basic ' . $credentials,
