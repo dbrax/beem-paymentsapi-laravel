@@ -28,8 +28,8 @@ class Beempayments
     ) {
         $this->apikey = config("beempayments.api_key");
         $this->secretkey = config("beempayments.secret_key");
-        $url = config('beempayments.base_url') . "/v1/checkout" . "
-        ?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number;
+        $url = config('beempayments.base_url')."/v1/checkout". 
+        "?amount=".$amount."&reference_number=".$reference_number."&sendSource=true&mobile=".$mobile_number;
 
         $beemapi = new BeemApi($this->apikey, $this->secretkey);
         $reponse = $beemapi->BpayRequest($url);
