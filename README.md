@@ -16,7 +16,38 @@ composer require epmnzava/beempayments
 ## Usage
 
 ```php
-// Usage description is coming soon
+// 
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Epmnzava\Annoucement\Annoucement;
+use Epmnzava\LaravelCms\LaravelCms;
+use Epmnzava\MpesaTanzania\MpesaTanzania;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Log;
+use Epmnzava\Beempayments\Beempayments;
+
+class CheckoutController extends Controller
+{
+   
+
+
+public function beemCheckout(){
+
+	//create a beempayment instance
+    $bpay=new Beempayments;
+
+   //use the checkout method to request a payment.
+   //remember the arguments should be created from your system.
+  $res=$bpay->checkout("50000","255701000000","SAMPLE-12345","96f9cc09-afa0-40cf-928a-d7e2b27b2411");
+
+//reponse doc coming soon
+
+}
+
 ```
 
 ### Testing
