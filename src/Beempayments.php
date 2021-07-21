@@ -26,12 +26,13 @@ class Beempayments
         $amount,
         $mobile_number,
         $reference_number,
+        $transactionid
 
     ) {
         $this->apikey = config("beempayments.api_key");
         $this->secretkey = config("beempayments.secret_key");
         $url = config('beempayments.base_url') . "/v1/checkout" .
-            "?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number;
+            "?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number."&transaction_id=".$transactionid;
 
         $beemapi = new BeemApi($this->apikey, $this->secretkey);
         $reponse = $beemapi->BpayRequest($url);
