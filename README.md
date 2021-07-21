@@ -44,7 +44,16 @@ public function beemCheckout(){
    //remember the arguments should be created from your system.
   $res=$bpay->checkout("50000","255701000000","SAMPLE-12345","96f9cc09-afa0-40cf-928a-d7e2b27b2411");
 
+ //convert your reponse to an array to access src
+ $response=json_decode($res);
+
+
+// go to the link provided
+return redirect($response->src);
 //reponse doc coming soon
+
+
+
 
 }
 
