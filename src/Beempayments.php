@@ -35,10 +35,10 @@ class Beempayments
             "?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number."&transaction_id=".$transactionid;
 
         $beemapi = new BeemApi($this->apikey, $this->secretkey);
-        $reponse = $beemapi->BpayRequest($url);
+        $response = $beemapi->BpayRequest($url);
 
 
-      return $reponse;
+      return $response;
     }
 
 
