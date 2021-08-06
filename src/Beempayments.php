@@ -10,7 +10,6 @@
 
 namespace Epmnzava\Beempayments;
 
-use Epmnzava\Beempayments\util\BeemApi;
 
 class Beempayments
 {
