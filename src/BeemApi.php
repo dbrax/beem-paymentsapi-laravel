@@ -34,9 +34,7 @@ class BeemApi
   {
 
     $credentials = base64_encode("$this->key:$this->secret");
-
     $curl = curl_init();
-
     curl_setopt_array($curl, array(
       CURLOPT_URL => $url,
       CURLOPT_RETURNTRANSFER => true,
@@ -46,9 +44,13 @@ class BeemApi
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => array('website' => $website),
+       CURLOPT_POSTFIELDS =>'{
+       "website":'.$website.'
+     }',
       CURLOPT_HTTPHEADER => array(
-        'Authorization: Basic ' . $credentials
+        'Authorization: Basic ' . $credentials,
+        'Content-Type: 	application/json'
+
       ),
     ));
 
