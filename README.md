@@ -1,9 +1,6 @@
-
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/epmnzava/beempayments.svg?style=flat-square)](https://packagist.org/packages/epmnzava/beempayments)
 [![Total Downloads](https://img.shields.io/packagist/dt/epmnzava/beempayments.svg?style=flat-square)](https://packagist.org/packages/epmnzava/beempayments)
 ![GitHub Actions](https://github.com/epmnzava/beempayments/actions/workflows/main.yml/badge.svg)
-
-
 
 ## Installation
 
@@ -16,7 +13,7 @@ composer require epmnzava/beempayments
 ## Usage
 
 ```php
-// 
+//
 <?php
 
 namespace App\Http\Controllers;
@@ -32,7 +29,7 @@ use Epmnzava\Beempayments\Beempayments;
 
 class CheckoutController extends Controller
 {
-   
+
 
 
 public function beemCheckout(){
@@ -57,6 +54,23 @@ return redirect($response->src);
 
 }
 
+
+//whitelisting service
+
+public function whitelistmywebsite(){
+    $website="https://storewid.com";
+     $bpay=new Beempayments;
+
+   $response=$bpay->whitelist($website);
+
+//$reponse={
+    "status": 200,
+    "message": "succesful"
+//};
+
+}
+
+
 ```
 
 ### Testing
@@ -79,8 +93,8 @@ If you discover any security related issues, please email emmanuel@opensource.co
 
 ## Credits
 
--   [Emmanuel Mnzava](https://github.com/epmnzava)
--   [All Contributors](../../contributors)
+- [Emmanuel Mnzava](https://github.com/epmnzava)
+- [All Contributors](../../contributors)
 
 ## License
 

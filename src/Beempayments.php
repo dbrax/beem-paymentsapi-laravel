@@ -28,16 +28,34 @@ class Beempayments
         $transactionid
 
     ) {
-        $this->apikey = config("beempayments.api_key");
+
         $this->secretkey = config("beempayments.secret_key");
+
+        $this->apikey = config("beempayments.api_key");
         $url = config('beempayments.base_url') . "/v1/checkout" .
-            "?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number."&transaction_id=".$transactionid;
+            "?amount=" . $amount . "&reference_number=" . $reference_number . "&sendSource=true&mobile=" . $mobile_number . "&transaction_id=" . $transactionid;
 
         $beemapi = new BeemApi($this->apikey, $this->secretkey);
         $response = $beemapi->BpayRequest($url);
 
 
-      return $response;
+        return $response;
+    }
+
+    public function whitelist($website)
+    {
+
+
+        $this->secretkey = config("beempayments.secret_key");
+
+        $this->apikey = config("beempayments.api_key");
+        $url = config('beempayments.base_url') . "/v1/whitelist/add-to-list";
+
+        $beemapi = new BeemApi($this->apikey, $this->secretkey);
+        $response = $beemapi->whitelistRequest($url, $website);
+
+
+        return $response;
     }
 
 

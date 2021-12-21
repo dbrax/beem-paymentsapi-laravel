@@ -21,43 +21,69 @@ class BeemApi
 
 
 
-    public $key;
-    public $secret;
+  public $key;
+  public $secret;
 
-    public function __construct($key, $secret)
-    {
-        $this->key = $key;
-        $this->secret = $secret;
-    }
-    public function BpayRequest($url)
-    {
+  public function __construct($key, $secret)
+  {
+    $this->key = $key;
+    $this->secret = $secret;
+  }
 
-        $client = new Client();
-        $credentials = base64_encode("$this->key:$this->secret");
+  public function whitelistRequest($url, $website)
+  {
+
+    $credentials = base64_encode("$this->key:$this->secret");
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => array('website' => $website),
+      CURLOPT_HTTPHEADER => array(
+        'Authorization: Basic ' . $credentials
+      ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    return $response;
+  }
+  public function BpayRequest($url)
+  {
+
+    $client = new Client();
+    $credentials = base64_encode("$this->key:$this->secret");
 
 
-$curl = curl_init();
+    $curl = curl_init();
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => $url,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'GET',
-  CURLOPT_HTTPHEADER => array(
-    'Authorization: Basic '.$credentials
-  ),
-));
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'GET',
+      CURLOPT_HTTPHEADER => array(
+        'Authorization: Basic ' . $credentials
+      ),
+    ));
 
-$response = curl_exec($curl);
+    $response = curl_exec($curl);
 
-curl_close($curl);
+    curl_close($curl);
 
-return $response;
-    }
-
-
+    return $response;
+  }
 }
